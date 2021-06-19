@@ -1,17 +1,24 @@
 if [ -z "$2" ]
 then
-  NR = 99
+  for i in $(eval echo "{01..99}")
+  do
+    if [ ! -d $1/$i ]
+    then
+      echo "Creating directory: $1/$i"
+      sudo mkdir $1/$i
+    else
+      echo "$1:$i: Directory exists. Skipping."
+    fi
+  done
 else
-  NR = $2
+  for i in $(eval echo "{01..$2}")
+  do
+    if [ ! -d $1/$i ]
+    then
+      echo "Creating directory: $1/$i"
+      sudo mkdir $1/$i
+    else
+      echo "$1/$i: Directory exists. Skipping."
+    fi
+  done
 fi
-
-for i in $(eval echo "{01..$NR}")
-do
-  if [ ! -d $1/$i ]
-  then
-    echo "Creating directory: $1/$i"
-    sudo mkdir $1/$i
-  else
-    echo "Directory exists. Skipping."
-  fi
-done

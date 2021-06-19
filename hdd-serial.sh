@@ -1,4 +1,4 @@
-if [ ! $2 -eq 'full' ]
+if [ $2 == 'full' ]
 then
 	udevadm info --query=all --name=$1
 else
